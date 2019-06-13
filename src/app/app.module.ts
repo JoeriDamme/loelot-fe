@@ -8,22 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
 // Social Login
-import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
-
-import { environment } from '../environments/environment';
-
-const config = new AuthServiceConfig([
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider(environment.facebookAppId, {
-      scope: 'email',
-    })
-  }
-]);
-
-export function provideConfig() {
-  return config;
-}
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import { AuthenticationService } from './authentication.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +26,7 @@ export function provideConfig() {
   providers: [
     {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
+      useFactory: AuthenticationService.getAuthServiceConfig()
     }
   ],
   bootstrap: [AppComponent]
