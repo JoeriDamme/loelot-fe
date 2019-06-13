@@ -10,10 +10,12 @@ import { LoginComponent } from './login/login.component';
 // Social Login
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 
+import { environment } from '../environments/environment';
+
 const config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('375174843225605', {
+    provider: new FacebookLoginProvider(environment.facebookAppId, {
       scope: 'email',
     })
   }
