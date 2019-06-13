@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 })
 export class AuthenticationService {
 
-  constructor(private authServiceConfig: AuthServiceConfig) { }
+  constructor() { }
 
   public static getAuthServiceConfig(): () => AuthServiceConfig {
     return () => new AuthServiceConfig([{
