@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  facebookAppId: '375174843225605',
+  apiUrl: 'http://localhost:5555',
+  tokenName: 'token', // the key name in the local storage
 };
 
 /*
