@@ -5,21 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
+import { IUser } from './models/user';
 
 interface IJWTToken {
   token: string;
   user: IUser;
-}
-
-interface IUser {
-  createdAt: string;
-  displayName: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  roleUuid: string;
-  updatedAt: string;
-  uuid: string;
 }
 
 @Injectable({
