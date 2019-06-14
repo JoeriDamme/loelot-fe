@@ -16,11 +16,7 @@ export class UserService {
   /**
    * Returning the user from the backend that is signed in.
    */
-  getMe(token: string): Observable<IUser> {
-    return this.http.get<IUser>(`${this.apiUrl}/me`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      }
-    });
+  getMe(): Observable<IUser> {
+    return this.http.get<IUser>(`${this.apiUrl}/me`);
   }
 }

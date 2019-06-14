@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.getJwtFromFacebookToken(user.authToken).subscribe((jwtData) => {
           // set the token in the authentication service
           this.authenticationService.setToken(jwtData.token);
-          this.userService.getMe(jwtData.token).subscribe(x => console.log(x));
+          this.userService.getMe().subscribe(x => console.log(x));
         });
       });
     }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 // Social Login
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { AuthenticationService } from './authentication.service';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,12 @@ import { AuthenticationService } from './authentication.service';
     {
       provide: AuthServiceConfig,
       useFactory: AuthenticationService.getAuthServiceConfig()
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
