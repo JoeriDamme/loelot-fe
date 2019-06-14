@@ -101,4 +101,8 @@ export class AuthenticationService {
     // convert to unix timestamp and check
     return moment(date).valueOf() < moment().valueOf();
   }
+
+  logout(): void {
+    return localStorage.removeItem(environment.tokenName);
+  }
 }
