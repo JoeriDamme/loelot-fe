@@ -4,19 +4,22 @@ import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
+import * as moment from 'moment';
 
-interface JWTToken {
+interface IJWTToken {
   token: string;
-  user: {
-    createdAt: string;
-    displayName: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    roleUuid: string;
-    updatedAt: string;
-    uuid: string;
-  };
+  user: IUser;
+}
+
+interface IUser {
+  createdAt: string;
+  displayName: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  roleUuid: string;
+  updatedAt: string;
+  uuid: string;
 }
 
 @Injectable({
@@ -26,7 +29,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  apiPath = `${environment.apiUrl}/api/auth`;
+  private apiPath = `${environment.apiUrl}/api/auth`;
 
   public static getAuthServiceConfig(): () => AuthServiceConfig {
     return () => new AuthServiceConfig([{
@@ -41,8 +44,8 @@ export class AuthenticationService {
    * Authenticate on the backend with the facebook Auth token.
    * @param authToken Authentication code received from the facebook front-end login.
    */
-  public getJwtFromFacebookToken(authToken: string): Observable<JWTToken> {
-    return this.http.get<JWTToken>(`${this.apiPath}/facebook`, {
+  public getJwtFromFacebookToken(authToken: string): Observable<IJWTToken> {
+    return this.http.get<IJWTToken>(`${this.apiPath}/facebook`, {
       headers: {
         authorization: `Bearer ${authToken}`
       }
@@ -71,18 +74,16 @@ export class AuthenticationService {
     const token = this.getToken();
 
     if (!token) {
-      return new Date(0);
+      return moment(0).toDate();
     }
 
     const decoded = jwt_decode(token);
 
     if (!decoded.exp) {
-      return new Date(0);
+      return moment(0).toDate();
     }
 
-    const date = new Date(0);
-    date.setUTCSeconds(decoded.exp);
-    return date;
+    return moment.unix(decoded.exp).toDate();
   }
 
   /**
@@ -97,6 +98,7 @@ export class AuthenticationService {
 
     const date = this.getTokenExpirationDate();
 
-    return !(date.valueOf() > new Date().valueOf());
+    // convert to unix timestamp and check
+    return moment(date).valueOf() < moment().valueOf();
   }
 }

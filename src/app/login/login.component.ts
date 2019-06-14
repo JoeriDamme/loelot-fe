@@ -12,12 +12,16 @@ export class LoginComponent implements OnInit {
   constructor(private socialAuthService: SocialAuthService, private authenticationService: AuthenticationService) { }
 
   signInWithFB(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((user) => {
-      this.authenticationService.getJwtFromFacebookToken(user.authToken).subscribe((jwtData) => {
-        // set the token in the authentication service
-        this.authenticationService.setToken(jwtData.token);
+    const expired = this.authenticationService.isTokenExpired();
+
+    if (expired) {
+      this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((user) => {
+        this.authenticationService.getJwtFromFacebookToken(user.authToken).subscribe((jwtData) => {
+          // set the token in the authentication service
+          this.authenticationService.setToken(jwtData.token);
+        });
       });
-    });
+    }
   }
 
   ngOnInit() {

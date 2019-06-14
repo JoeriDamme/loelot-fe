@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   facebookAppId: '375174843225605',
   apiUrl: 'http://localhost:5555',
-  tokenName: 'jwt', // the key name in the local storage
+  tokenName: 'token', // the key name in the local storage
 };
 
 /*
