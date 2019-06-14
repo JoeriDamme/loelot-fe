@@ -3,6 +3,7 @@ import { AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login'
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
 
 interface JWTToken {
   token: string;
@@ -46,5 +47,56 @@ export class AuthenticationService {
         authorization: `Bearer ${authToken}`
       }
     });
+  }
+
+  /**
+   * Get the JWT token.
+   */
+  getToken(): string {
+    return localStorage.getItem(environment.tokenName);
+  }
+
+  /**
+   * Set the JWT token.
+   * @param token JWT token received from backend.
+   */
+  setToken(token: string): void {
+    localStorage.setItem(environment.tokenName, token);
+  }
+
+  /**
+   * Get the expiration date of the token.
+   */
+  getTokenExpirationDate(): Date {
+    const token = this.getToken();
+
+    if (!token) {
+      return new Date(0);
+    }
+
+    const decoded = jwt_decode(token);
+
+    if (!decoded.exp) {
+      return new Date(0);
+    }
+
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+
+  /**
+   * Check if token is expired.
+   */
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+
+    if (!token) {
+      return true;
+    }
+
+    const date = this.getTokenExpirationDate();
+
+    return !(date.valueOf() > new Date().valueOf());
   }
 }

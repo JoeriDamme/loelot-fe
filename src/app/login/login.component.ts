@@ -13,10 +13,9 @@ export class LoginComponent implements OnInit {
 
   signInWithFB(): void {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((user) => {
-      this.authenticationService.getJwtFromFacebookToken(user.authToken).subscribe((jwt) => {
-        console.log({
-          jwt,
-        });
+      this.authenticationService.getJwtFromFacebookToken(user.authToken).subscribe((jwtData) => {
+        // set the token in the authentication service
+        this.authenticationService.setToken(jwtData.token);
       });
     });
   }
