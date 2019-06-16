@@ -13,7 +13,7 @@ interface IJWTToken {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
 
@@ -26,7 +26,7 @@ export class AuthenticationService {
       id: FacebookLoginProvider.PROVIDER_ID,
       provider: new FacebookLoginProvider(environment.facebookAppId, {
         scope: 'email',
-      })
+      }),
     }]);
   }
 
@@ -37,8 +37,8 @@ export class AuthenticationService {
   public getJwtFromFacebookToken(authToken: string): Observable<IJWTToken> {
     return this.http.get<IJWTToken>(`${this.apiPath}/facebook`, {
       headers: {
-        authorization: `Bearer ${authToken}`
-      }
+        authorization: `Bearer ${authToken}`,
+      },
     });
   }
 

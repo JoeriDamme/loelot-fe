@@ -18,25 +18,25 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     AppComponent,
     NavigationComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
   ],
   providers: [
     {
       provide: AuthServiceConfig,
-      useFactory: AuthenticationService.getAuthServiceConfig()
+      useFactory: AuthenticationService.getAuthServiceConfig(),
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
+      multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
