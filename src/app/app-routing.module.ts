@@ -7,7 +7,7 @@ import { AuthenticationGuard } from './guards/authentication.guard';
 const routes: Routes = [{
   path: '',
   component: HomeComponent,
-  canActivate: [ AuthenticationGuard ]
+  canActivate: [AuthenticationGuard],
 }, {
   path: 'login',
   component: LoginComponent,
@@ -15,6 +15,6 @@ const routes: Routes = [{
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
