@@ -10,8 +10,8 @@ import { LoginComponent } from './login/login.component';
 
 // Social Login
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
-import { AuthenticationService } from './authentication.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
