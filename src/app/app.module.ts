@@ -13,6 +13,7 @@ import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 import { GroupListComponent } from './group-list/group-list.component';
+import { GroupCreateComponent } from './group-create/group-create.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { GroupListComponent } from './group-list/group-list.component';
     HomeComponent,
     LoginComponent,
     GroupListComponent,
+    GroupCreateComponent,
   ],
   imports: [
     BrowserModule,
