@@ -14,6 +14,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupCreateComponent } from './group-create/group-create.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,8 @@ import { GroupCreateComponent } from './group-create/group-create.component';
     HttpClientModule,
     AppRoutingModule,
     SocialLoginModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
