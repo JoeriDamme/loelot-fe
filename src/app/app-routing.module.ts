@@ -3,10 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
+import { GroupListComponent } from './group-list/group-list.component';
 
 const routes: Routes = [{
   path: '',
   component: HomeComponent,
+  canActivate: [AuthenticationGuard],
+}, {
+  path: 'groups',
+  component: GroupListComponent,
   canActivate: [AuthenticationGuard],
 }, {
   path: 'login',

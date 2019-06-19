@@ -10,8 +10,9 @@ import { LoginComponent } from './login/login.component';
 
 // Social Login
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
-import { AuthenticationService } from './authentication.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { AuthenticationService } from './services/authentication.service';
+import { GroupListComponent } from './group-list/group-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     NavigationComponent,
     HomeComponent,
     LoginComponent,
+    GroupListComponent,
   ],
   imports: [
     BrowserModule,

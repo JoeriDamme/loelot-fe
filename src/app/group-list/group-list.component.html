@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Creator Uuid</th>
+      <th>Admin Uuid</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let group of groups">
+      <td>{{ group.name }}</td>
+      <td>{{ group.creatorUuid }}</td>
+      <td>{{ group.adminUuid }}</td>
+      <td>{{ group.createdAt }}</td>
+      <td>{{ group.updatedAt }}</td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-primary">Add Group</button>
