@@ -15,6 +15,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ServerErrorInterceptor } from './helpers/server-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
       multi: true,
     },
   ],
