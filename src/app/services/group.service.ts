@@ -16,4 +16,8 @@ export class GroupService {
   getAll(): Observable<IGroup[]> {
     return this.http.get<IGroup[]>(`${this.apiUrl}`);
   }
+
+  post(data: IGroup): Observable<IGroup> {
+    return this.http.post<IGroup>(`${this.apiUrl}`, data);
+  }
 }

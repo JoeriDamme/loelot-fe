@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GroupService } from '../services/group.service';
 
 @Component({
   selector: 'app-group-create',
@@ -11,7 +12,7 @@ export class GroupCreateComponent implements OnInit {
   createGroupForm: FormGroup;
   submitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
 
   get f() {
     return this.createGroupForm.controls;
@@ -46,6 +47,12 @@ export class GroupCreateComponent implements OnInit {
     console.info('Form valid!');
     console.info({
       value: this.createGroupForm.value,
+    });
+
+    this.groupService.post(this.createGroupForm.value).subscribe((group) => {
+      console.log({
+        group,
+      });
     });
   }
 
