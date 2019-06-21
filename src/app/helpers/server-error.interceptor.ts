@@ -8,9 +8,12 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {
+
+  constructor(private notificationService: NotificationService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -19,12 +22,12 @@ export class ServerErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
 
         if (error.status === 400) {
-          // bad request
+          this.notificationService.showError();
         } else if (error.status === 401) {
           // refresh token
-        } else {
-          return throwError(error);
         }
+
+        return throwError(error);
       }),
     );
   }

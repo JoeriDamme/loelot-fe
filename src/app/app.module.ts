@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -17,6 +18,9 @@ import { GroupCreateComponent } from './group-create/group-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServerErrorInterceptor } from './helpers/server-error.interceptor';
 
+// Toast
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,11 +32,13 @@ import { ServerErrorInterceptor } from './helpers/server-error.interceptor';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     SocialLoginModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {
