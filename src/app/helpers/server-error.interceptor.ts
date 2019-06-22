@@ -22,7 +22,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
 
         if (error.status === 400) {
-          this.notificationService.showError();
+          this.notificationService.showError(error.error.message, error.error.errors[0].message);
         } else if (error.status === 401) {
           // refresh token
         }

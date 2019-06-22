@@ -8,7 +8,9 @@ export class NotificationService {
 
   constructor(private toastr: ToastrService) { }
 
-  showError() {
-    this.toastr.error('Hello world!', 'Toastr fun!');
+  showError(title: string, message: string) {
+    this.toastr.error(message, title, {
+      positionClass: 'toast-bottom-full-width',
+    });
   }
 }
