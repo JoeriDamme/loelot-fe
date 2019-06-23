@@ -22,10 +22,17 @@ export class JwtInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
+    let contentType = 'application/json';
+
+    if (request.body instanceof FormData) {
+      // we are sending a file here
+      contentType = 'multipart/form-data';
+    }
+
     // clone the request with bearer token
     const clonedRequestWithJwt = request.clone({
       setHeaders: {
-        'content-type': 'application/json',
+        'content-type': contentType,
         authorization: `Bearer ${token}`,
       },
     });

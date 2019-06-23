@@ -11,6 +11,7 @@ export class GroupCreateComponent implements OnInit {
 
   createGroupForm: FormGroup;
   submitted: boolean = false;
+  selectedIcon: File = null;
 
   constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
 
@@ -33,7 +34,12 @@ export class GroupCreateComponent implements OnInit {
   ngOnInit() {
     this.createGroupForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(48)]],
+      icon: ['', [Validators.required]],
     });
+  }
+
+  onFileChanged(event) {
+    this.selectedIcon = event.target.files[0];
   }
 
   onSubmit() {
@@ -44,12 +50,12 @@ export class GroupCreateComponent implements OnInit {
       return;
     }
 
-    console.info('Form valid!');
-    console.info({
-      value: this.createGroupForm.value,
-    });
+    // need to post multipart/form-data to our server
+    const formData = new FormData();
+    formData.append('icon', this.selectedIcon, this.selectedIcon.name);
+    formData.append('name', this.createGroupForm.get('name').value);
 
-    this.groupService.post(this.createGroupForm.value).subscribe((group) => {
+    this.groupService.post(formData).subscribe((group) => {
       console.log({
         group,
       });

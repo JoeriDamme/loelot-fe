@@ -17,7 +17,7 @@ export class GroupService {
     return this.http.get<IGroup[]>(`${this.apiUrl}`);
   }
 
-  post(data: IGroup): Observable<IGroup> {
+  post(data: FormData): Observable<IGroup> {
     return this.http.post<IGroup>(`${this.apiUrl}`, data);
   }
 }
