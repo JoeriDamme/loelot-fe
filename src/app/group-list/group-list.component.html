@@ -13,8 +13,8 @@
     <tr *ngFor="let group of groups">
       <td><img [src]="group.icon"></td>
       <td>{{ group.name }}</td>
-      <td>{{ group.creatorUuid }}</td>
-      <td>{{ group.adminUuid }}</td>
+      <td>{{ group.creator.displayName }}</td>
+      <td>{{ group.admin.displayName }}</td>
       <td>{{ group.createdAt }}</td>
       <td>{{ group.updatedAt }}</td>
     </tr>
