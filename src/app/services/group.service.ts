@@ -13,7 +13,11 @@ export class GroupService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<IGroup[]> {
-    return this.http.get<IGroup[]>(`${this.apiUrl}`);
+  getAll(query: string): Observable<IGroup[]> {
+    return this.http.get<IGroup[]>(`${this.apiUrl}?${query}`);
+  }
+
+  post(data: IGroup): Observable<IGroup> {
+    return this.http.post<IGroup>(`${this.apiUrl}`, data);
   }
 }

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -13,6 +14,12 @@ import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 import { GroupListComponent } from './group-list/group-list.component';
+import { GroupCreateComponent } from './group-create/group-create.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ServerErrorInterceptor } from './helpers/server-error.interceptor';
+
+// Toast
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,12 +28,17 @@ import { GroupListComponent } from './group-list/group-list.component';
     HomeComponent,
     LoginComponent,
     GroupListComponent,
+    GroupCreateComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     SocialLoginModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {
@@ -36,6 +48,11 @@ import { GroupListComponent } from './group-list/group-list.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
       multi: true,
     },
   ],

@@ -1,6 +1,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Icon</th>
       <th>Name</th>
       <th>Creator Uuid</th>
       <th>Admin Uuid</th>
@@ -10,12 +11,13 @@
   </thead>
   <tbody>
     <tr *ngFor="let group of groups">
+      <td><img [src]="group.icon"></td>
       <td>{{ group.name }}</td>
-      <td>{{ group.creatorUuid }}</td>
-      <td>{{ group.adminUuid }}</td>
+      <td>{{ group.creator.displayName }}</td>
+      <td>{{ group.admin.displayName }}</td>
       <td>{{ group.createdAt }}</td>
       <td>{{ group.updatedAt }}</td>
     </tr>
   </tbody>
 </table>
-<button class="btn btn-primary">Add Group</button>
+<button class="btn btn-primary" routerLink="/groups/create">Add Group</button>

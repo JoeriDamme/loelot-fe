@@ -14,7 +14,8 @@ export class GroupListComponent implements OnInit {
   constructor(private groupService: GroupService) { }
 
   ngOnInit() {
-    this.groupService.getAll().subscribe((data: IGroup[]) => this.groups = data);
+    const query = 'include=admin,creator';
+    this.groupService.getAll(query).subscribe((data: IGroup[]) => this.groups = data);
   }
 
 }
