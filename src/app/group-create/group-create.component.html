@@ -12,7 +12,7 @@
       </div>
       <div class="form-group">
         <label>Icon:</label>
-        <input type="file" formControlName="icon" (change)="onFileChanged($event)">
+        <input type="file" formControlName="icon" accept="image/*" (change)="onFileChanged($event)">
       </div>
       <div class="form-group">
         <button class="btn btn-primary">Toevoegen</button>

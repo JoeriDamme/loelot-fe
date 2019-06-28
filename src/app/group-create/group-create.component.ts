@@ -11,7 +11,7 @@ export class GroupCreateComponent implements OnInit {
 
   createGroupForm: FormGroup;
   submitted: boolean = false;
-  selectedIcon: File = null;
+  base64textString: string;
 
   constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
 
@@ -39,7 +39,14 @@ export class GroupCreateComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    this.selectedIcon = event.target.files[0];
+    // this.selectedIcon = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      // convert to base64
+      reader.onload = () => this.base64textString = reader.result.toString();
+      reader.readAsDataURL(file);
+    }
   }
 
   onSubmit() {
@@ -51,11 +58,12 @@ export class GroupCreateComponent implements OnInit {
     }
 
     // need to post multipart/form-data to our server
-    const formData = new FormData();
-    formData.append('icon', this.selectedIcon, this.selectedIcon.name);
-    formData.append('name', this.createGroupForm.get('name').value);
+    const groupData = {
+      icon: this.base64textString,
+      name: this.createGroupForm.get('name').value,
+    };
 
-    this.groupService.post(formData).subscribe((group) => {
+    this.groupService.post(groupData).subscribe((group) => {
       console.log({
         group,
       });
