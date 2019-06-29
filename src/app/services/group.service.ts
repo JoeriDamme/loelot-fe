@@ -17,8 +17,8 @@ export class GroupService {
     return this.http.get<IGroup[]>(`${this.apiUrl}?${query}`);
   }
 
-  get(uuid: string): Observable<IGroup> {
-    return this.http.get<IGroup>(`${this.apiUrl}/${uuid}`);
+  get(uuid: string, query: string = ''): Observable<IGroup> {
+    return this.http.get<IGroup>(`${this.apiUrl}/${uuid}?${query}`);
   }
 
   post(data: IGroup): Observable<IGroup> {

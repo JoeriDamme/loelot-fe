@@ -19,7 +19,9 @@ export class GroupViewComponent implements OnInit {
     if (!uuid) {
       // show 404
     }
-    this.groupService.get(uuid).subscribe((data: IGroup) => this.group = data);
+
+    const query = 'include=admin,creator,users';
+    this.groupService.get(uuid, query).subscribe((data: IGroup) => this.group = data);
   }
 
 }
