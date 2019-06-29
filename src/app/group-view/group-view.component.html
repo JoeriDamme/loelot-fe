@@ -1,7 +1,21 @@
 <div class="card">
   <img class="rounded-circle mx-auto d-block img-width mt-1" [src]="group.icon" alt="group image">
   <div class="card-body">
-    <h5 class="card-title text-center">{{ group.name }}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h4 class="card-title text-center">{{ group.name }}</h4>
+    <h5>Mijn verlanglijstje</h5>
+    <table>
+      <tr>
+        <td>Bier</td>
+      </tr>
+      <tr>
+        <td>Wijn</td>
+      </tr>
+    </table>
+    <h5>Mensen in de groep</h5>
+    <table>
+        <tr *ngFor="let user of group.users">
+          <td>{{ user.displayName }}</td>
+        </tr>
+      </table>
   </div>
 </div>
