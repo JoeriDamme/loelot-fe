@@ -4,6 +4,7 @@ export interface IGroup {
   adminUuid?: string;
   name: string;
   icon: string;
+  users?: any[];
   readonly createdAt?: Date;
   readonly updatedAt?: Date;
 }
