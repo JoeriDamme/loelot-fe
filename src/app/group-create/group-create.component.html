@@ -3,7 +3,7 @@
   <form [formGroup]="createGroupForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label>Naam:</label>
-        <input type="text" formControlName="name" class="form-control" [ngClass]="getFormGroupClass()" />
+        <input type="text" formControlName="name" class="form-control" [ngClass]="getFormGroupClass('name')" />
         <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
           <div *ngIf="f.name.errors.required">Veld is verplicht</div>
           <div *ngIf="f.name.errors.minlength">Minimale lengte is 6</div>
