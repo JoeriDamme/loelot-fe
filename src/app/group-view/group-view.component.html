@@ -1,0 +1,20 @@
+<div *ngIf="group">
+  <h3>{{ group.name }}</h3>
+  <img class="rounded-circle d-block img-width mt-1" [src]="group.icon" alt="group image">
+
+  <h4>Mijn verlanglijstje</h4>
+  <table>
+    <tr>
+      <td>Bier</td>
+    </tr>
+    <tr>
+      <td>Wijn</td>
+    </tr>
+  </table>
+  <h4>Mensen in de groep</h4>
+  <table>
+    <tr *ngFor="let user of group.users">
+      <td>{{ user.displayName }}</td>
+    </tr>
+  </table>
+</div>

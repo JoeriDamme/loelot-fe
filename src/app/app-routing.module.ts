@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupCreateComponent } from './group-create/group-create.component';
+import { GroupViewComponent } from './group-view/group-view.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,10 @@ const routes: Routes = [{
 }, {
   path: 'groups/create',
   component: GroupCreateComponent,
+  canActivate: [AuthenticationGuard],
+}, {
+  path: 'groups/:uuid',
+  component: GroupViewComponent,
   canActivate: [AuthenticationGuard],
 }, {
   path: 'login',

@@ -19,12 +19,12 @@ export class GroupCreateComponent implements OnInit {
     return this.createGroupForm.controls;
   }
 
-  getFormGroupClass(): string {
-    if (this.submitted && this.f.name.errors) {
+  getFormGroupClass(formfield: string): string {
+    if (this.submitted && this.f[formfield].errors) {
       return 'is-invalid';
     }
 
-    if (this.f.name.valid) {
+    if (this.f[formfield].valid) {
       return 'is-valid';
     }
 

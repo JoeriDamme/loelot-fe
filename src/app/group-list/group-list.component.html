@@ -12,7 +12,7 @@
   <tbody>
     <tr *ngFor="let group of groups">
       <td><img [src]="group.icon"></td>
-      <td>{{ group.name }}</td>
+      <td><a [routerLink]="['/groups/', group.uuid]">{{ group.name }}</a></td>
       <td>{{ group.creator.displayName }}</td>
       <td>{{ group.admin.displayName }}</td>
       <td>{{ group.createdAt }}</td>

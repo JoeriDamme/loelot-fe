@@ -20,6 +20,7 @@ import { ServerErrorInterceptor } from './helpers/server-error.interceptor';
 
 // Toast
 import { ToastrModule } from 'ngx-toastr';
+import { GroupViewComponent } from './group-view/group-view.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     GroupListComponent,
     GroupCreateComponent,
+    GroupViewComponent,
   ],
   imports: [
     BrowserModule,
