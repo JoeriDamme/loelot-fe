@@ -3,6 +3,23 @@
   <img class="rounded-circle d-block img-width mt-1" [src]="group.icon" alt="group image">
 
   <h4>Mijn verlanglijstje</h4>
+  <div class="col-md-6">
+    <form [formGroup]="addToWishList" (ngSubmit)="onSubmitWishList()">
+      <div class="form-row">
+        <div class="col-md-8">
+          <input type="text" formControlName="description" class="form-control" [ngClass]="getFormGroupClass('description')" />
+          <div *ngIf="submittedWishList && f.description.errors" class="invalid-feedback">
+            <div *ngIf="f.description.errors.required">Veld is verplicht</div>
+            <div *ngIf="f.description.errors.minlength">Minimale lengte is 1</div>
+            <div *ngIf="f.description.errors.maxlength">Maximale lengte is 512</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Voeg toe</button>
+        </div>
+      </div>
+    </form>
+  </div>
   <table>
     <tr>
       <td>Bier</td>
