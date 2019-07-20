@@ -73,6 +73,12 @@ export class GroupViewComponent implements OnInit {
     });
   }
 
+  deleteWishList(uuid: string) {
+    this.wishListService.delete(uuid).subscribe(() => {
+      this.getWishListsForGroup();
+    });
+  }
+
   onSubmitWishList() {
     this.submittedWishList = true;
 

@@ -23,6 +23,7 @@
   <table>
     <tr *ngFor="let wishList of wishLists | wishListOfUser:userUuid">
       <td>{{ wishList.description }}</td>
+      <td><button class="btn btn-warning" (click)="deleteWishList(wishList.uuid)">Verwijder</button></td>
     </tr>
   </table>
   <h4>Mensen in de groep</h4>

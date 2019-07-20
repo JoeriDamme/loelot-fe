@@ -20,4 +20,8 @@ export class WishListService {
   getByGroupUuid(groupUuid: string): Observable<IWishList[]> {
     return this.http.get<IWishList[]>(`${this.apiUrl}?groupUuid=${groupUuid}`);
   }
+
+  delete(uuid: string): Observable<IWishList> {
+    return this.http.delete<null>(`${this.apiUrl}/${uuid}`);
+  }
 }
