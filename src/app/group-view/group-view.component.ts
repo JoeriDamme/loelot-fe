@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IGroup } from '../models/group';
 import { GroupService } from '../services/group.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { WishListService } from '../services/wish-list.service';
 import { IWishList } from '../models/wish-list';
 import { AuthenticationService } from '../services/authentication.service';
@@ -86,9 +86,9 @@ export class GroupViewComponent implements OnInit {
     data.rank = 1;
 
     this.wishListService.post(this.addToWishList.value).subscribe((wishList) => {
-      console.log({
-        wishList,
-      });
+      this.getWishListsForGroup();
+      this.addToWishList.reset();
+      this.submittedWishList = false;
     });
   }
 
