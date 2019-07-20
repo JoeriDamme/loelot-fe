@@ -21,6 +21,7 @@ import { ServerErrorInterceptor } from './helpers/server-error.interceptor';
 // Toast
 import { ToastrModule } from 'ngx-toastr';
 import { GroupViewComponent } from './group-view/group-view.component';
+import { WishListOfUserPipe } from './pipes/wish-list.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { GroupViewComponent } from './group-view/group-view.component';
     GroupListComponent,
     GroupCreateComponent,
     GroupViewComponent,
+    WishListOfUserPipe,
   ],
   imports: [
     BrowserModule,

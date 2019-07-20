@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { IGroup } from '../models/group';
 import { GroupService } from '../services/group.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { WishListService } from '../services/wish-list.service';
+import { IWishList } from '../models/wish-list';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-group-view',
@@ -14,11 +17,15 @@ export class GroupViewComponent implements OnInit {
   group: IGroup = null;
   addToWishList: FormGroup;
   submittedWishList: boolean = false;
+  wishLists: IWishList[] = [];
+  userUuid: string;
 
   constructor(
     private route: ActivatedRoute,
     private groupService: GroupService,
     private formBuilder: FormBuilder,
+    private wishListService: WishListService,
+    private authenticationService: AuthenticationService,
   ) { }
 
   get f() {
@@ -43,8 +50,14 @@ export class GroupViewComponent implements OnInit {
       // show 404
     }
 
+    const decodedToken = this.authenticationService.getDecodedToken();
+    this.userUuid = decodedToken.data.uuid;
+
     const query = 'include=admin,creator,users';
-    this.groupService.get(uuid, query).subscribe((data: IGroup) => this.group = data);
+    this.groupService.get(uuid, query).subscribe((data: IGroup) => {
+      this.group = data;
+      this.getWishListsForGroup();
+    });
 
     // setting up add wish list form
     this.addToWishList = this.formBuilder.group({
@@ -52,9 +65,31 @@ export class GroupViewComponent implements OnInit {
     });
   }
 
+  getWishListsForGroup() {
+    const groupUuid = this.group.uuid;
+
+    this.wishListService.getByGroupUuid(groupUuid).subscribe((wishLists) => {
+      this.wishLists = wishLists;
+    });
+  }
+
   onSubmitWishList() {
     this.submittedWishList = true;
-    console.log(this.addToWishList.value);
+
+        // stop here if form is invalid
+    if (this.addToWishList.invalid) {
+      return;
+    }
+
+    const data = this.addToWishList.value;
+    data.groupUuid = this.group.uuid;
+    data.rank = 1;
+
+    this.wishListService.post(this.addToWishList.value).subscribe((wishList) => {
+      console.log({
+        wishList,
+      });
+    });
   }
 
 }

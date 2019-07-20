@@ -21,11 +21,8 @@
     </form>
   </div>
   <table>
-    <tr>
-      <td>Bier</td>
-    </tr>
-    <tr>
-      <td>Wijn</td>
+    <tr *ngFor="let wishList of wishLists | wishListOfUser:userUuid">
+      <td>{{ wishList.description }}</td>
     </tr>
   </table>
   <h4>Mensen in de groep</h4>
