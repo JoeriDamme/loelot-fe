@@ -6,10 +6,25 @@ import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
+import { Router } from '@angular/router';
 
 interface IJWTToken {
   token: string;
   user: IUser;
+}
+
+interface IJWTTokenDecoded {
+  data: {
+    uuid: string;
+    displayName: string;
+    firstName: string;
+    lastName: string;
+    roleUuid: string;
+  };
+  exp: number;
+  iat: number;
+  permissions: string[];
+  roles: string[];
 }
 
 @Injectable({
@@ -17,7 +32,7 @@ interface IJWTToken {
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private apiPath = `${environment.apiUrl}/api/auth`;
 
@@ -90,6 +105,17 @@ export class AuthenticationService {
 
     // convert to unix timestamp and check
     return moment(date).valueOf() < moment().valueOf();
+  }
+
+  getDecodedToken(): IJWTTokenDecoded {
+    const token = this.getToken();
+
+    if (!token) {
+      this.logout();
+      this.router.navigate(['/login']);
+    }
+
+    return jwt_decode(token);
   }
 
   logout(): void {
